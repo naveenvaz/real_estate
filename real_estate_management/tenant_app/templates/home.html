@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <div class="card shadow p-3 mb-3 bg-white rounded" style="max-width: 400px; margin: auto;margin-top: 40px;">
+        <div class="text-center">
+            <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Welcome to Real Estate Application</h4>
+        </div>
+         <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">{{ request.user|capfirst }}</h4>
+
+    </div>
+</div>
+{% endblock %}

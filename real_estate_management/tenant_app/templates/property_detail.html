@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<div class="card">
+    <div class="card-header">
+        Property Details
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Name: {{ property.name }}</h5>
+        <p class="card-text">Address: {{ property.address }}</p>
+        <p class="card-text">Location: {{ property.location }}</p>
+        <p class="card-text">Features: {{ property.features }}</p>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        Units
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Rent Cost</th>
+                    <th>Available</th>
+                    <th>Current Tenant</th>
+                    <th>Features</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in units %}
+                    <tr>
+                        <td>{{ unit.size }}</td>
+                        <td>{{ unit.rent_cost }}</td>
+                        <td>{% if unit.available %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if unit.tenant %}{{ unit.tenant.name }}{% else %}{{'Vacant'}}{% endif %}</td>
+                        <td>{{ unit.features.all|join:", " }}</td>
+                        <td><a type="button" class="btn btn-info"href="/update_unit/{{unit.id}}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

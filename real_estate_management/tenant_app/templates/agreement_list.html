@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Unit List</h4>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 1050px; margin: auto;margin-top: 40px;">
+        <table class="table">
+            <thead style="background-color: #007BFF; color: #fff;">
+                <tr>
+                    <th scope="col">Property</th>
+                    <th scope="col">Tenant</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Rent Date</th>
+
+                    <th scope="col" style="padding-left: 75px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for agreement in agreements %}
+                    <tr>
+                        <td>{{ agreement.property.name }}</td>
+                        <td>{{ agreement.tenant.name }}</td>
+                        <td>{{ agreement.unit.size }}</td>
+                        <td>{{ agreement.start_date }}</td>
+                        <td>{{ agreement.end_date}}</td>
+                        <td>{{ agreement.monthly_rent_date}}</td>
+
+                        <td>
+                        <a type="button" class="btn btn-warning" href="/update_agreement/{{agreement.id}}">Update</a>
+                        <a type="button" class="btn btn-danger" href="/delete_agreement/{{agreement.id}}">Delete</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a type="button" class="btn btn-success" href="{% url 'create_agreement' %}">Create Agreement</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

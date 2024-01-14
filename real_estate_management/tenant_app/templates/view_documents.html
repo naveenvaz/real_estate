@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Documents for {{ tenant.name }}</h4>
+
+    {% if tenant.documents %}
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 600px; margin: auto; margin-top: 50px;">
+            <ul>
+                <li>
+                    <strong>{{ tenant.name }}'s Document</strong> -
+                    <a href="{{ tenant.documents.url }}" target="_blank">View Document</a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <p>No documents found for {{ tenant.name }}.</p>
+    {% endif %}
+
+    <div class="text-center" style="margin-top: 20px;">
+        <a href="{% url 'update_tenant' tenant.id %}" class="btn btn-primary">Edit Profile</a>
+        <a href="{% url 'agreements_for_tenant' tenant.id %}" class="btn btn-success">View Agreements</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% include 'sidebar.html'%}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+   <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Property List</h4>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 1050px; margin: auto;margin-top: 40px;">
+        <table class="table">
+            <thead style="background-color: #007BFF; color: #fff;">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Features</th>
+                    <th scope="col">Units</th>
+                    <th scope="col" style="padding-left: 75px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td>{{ property.name }}</td>
+                    <td>{{ property.address }}</td>
+                    <td>{{ property.location }}</td>
+                    <td>{{ property.features }}</td>
+                    <td><a type="button" class="btn btn-info" href="/property_units/{{ property.id }}">Units</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-warning" href="/property_update/{{ property.id }}">Update</a>
+                        <a type="button" class="btn btn-danger" href="/property_delete/{{ property.id }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a type="button" class="btn btn-success" href="{% url 'property_create' %}">Create</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

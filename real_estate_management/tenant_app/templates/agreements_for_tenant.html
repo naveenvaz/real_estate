@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <h4 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Agreements for {{ tenant.name }}</h4>
+
+    {% if agreements %}
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 600px; margin: auto; margin-top: 50px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Agreement Number</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agreement in agreements %}
+                        <tr>
+                            <td>{{ agreement.agreement_number }}</td>
+                            <td>{{ agreement.start_date }}</td>
+                            <td>{{ agreement.end_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No agreements found for {{ tenant.name }}.</p>
+    {% endif %}
+
+    <div class="text-center" style="margin-top: 20px;">
+        <a href="{% url 'update_tenant' tenant.id %}" class="btn btn-primary">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}

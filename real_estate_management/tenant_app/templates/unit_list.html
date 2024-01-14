@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% include 'sidebar.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body overflow-auto">
+    <h4 style="text-align: center; color: #007BFF; margin-bottom: 5px;"> Search Results</h4>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 1050px; margin: auto; margin-top: 40px;">
+        <form method="get" action="{% url 'unit_list' %}">
+            <div class="form-group">
+                <label for="search">Search:</label>
+                <input type="text" name="search" value="{{ search_query }}" class="form-control"
+                       placeholder="Enter search term">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</div>
+<div class="card-body overflow-auto">
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 1050px; margin: auto; margin-top: 10px;">
+        <h5 style="text-align: center; color: #28a745; margin-bottom: 20px;">Booked Units</h5>
+        <table class="table">
+            <thead style="background-color: #28a745; color: #fff;">
+            <tr>
+                <th scope="col">Property Name</th>
+                <th scope="col">Unit Size</th>
+                <th scope="col">Tenant Name</th>
+                <th scope="col" style="padding-left: 75px;">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unit in available_units %}
+            <tr>
+                <td>{{ unit.property.name }}</td>
+                <td>{{ unit.size }}</td>
+                <td>{{ unit.tenant.name|default:'Vacant' }}</td>
+                <td>
+                    <a type="button" class="btn btn-warning" href="/update_unit/{{unit.id}}">Update</a>
+                    <a type="button" class="btn btn-danger" href="/delete_unit/{{unit.id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="max-width: 1050px; margin: auto; margin-top: 10px;">
+        <h5 style="text-align: center; color: #007BFF; margin-bottom: 20px;">Available to Book Units</h5>
+        <table class="table">
+            <thead style="background-color: #007BFF; color: #fff;">
+            <tr>
+                <th scope="col">Property Name</th>
+                <th scope="col">Unit Size</th>
+                <th scope="col">Tenant Name</th>
+                <th scope="col" style="padding-left: 35px;">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unit in available_to_book_units %}
+            <tr>
+                <td>{{ unit.property.name }}</td>
+                <td>{{ unit.size }}</td>
+                <td>{{ unit.tenant.name|default:'Vacant' }}</td>
+                <td>
+                    <a type="button" class="btn btn-primary"
+                       href="{% url 'create_unit' %}?property_id={{ unit.property.id }}&size={{ unit.size }}">Book
+                        Now</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <a type="button" class="btn btn-success" href="{% url 'create_unit' %}">Create Unit</a>
+    </div>
+</div>
+{% endblock %}

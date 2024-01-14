@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <h5 style="text-align: center">Create New Unit</h5>
+    <div class="shadow p-3 mb-5 bg-white rounded" style="max-width: 400px; margin: auto;margin-top: 40px;">
+        <form method="post">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.property.id_for_label }}">property:</label>
+                {{ form.property }}
+                {% if form.property.errors %}
+                    <p class="text-danger">{{ form.property.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.size.id_for_label }}">size:</label>
+                {{ form.size }}
+                {% if form.size.errors %}
+                    <p class="text-danger">{{ form.size.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.rent_cost.id_for_label }}">rent_cost:</label>
+                {{ form.rent_cost }}
+                {% if form.rent_cost.errors %}
+                    <p class="text-danger">{{ form.rent_cost.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.available.id_for_label }}">available:</label>
+                {{ form.available }}
+                {% if form.available.errors %}
+                    <p class="text-danger">{{ form.available.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.features.id_for_label }}">features:</label>
+                {{ form.features }}
+                {% if form.features.errors %}
+                    <p class="text-danger">{{ form.features.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.tenant.id_for_label }}">tenant:</label>
+                {{ form.tenant }}
+                {% if form.tenant.errors %}
+                    <p class="text-danger">{{ form.tenant.errors|first }}</p>
+                {% endif %}
+            </div>
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="text-center" style="margin-top: 20px;">
+                <a type="button" class="btn btn-danger" href="{% url 'property_list' %}">Cancel</a>
+                <button type="submit" class="btn btn-success">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+<div class="card-body">
+    <h5 style="text-align: center">Create Feature</h5>
+    <div class="shadow p-3 mb-5 bg-white rounded" style="max-width: 400px; margin: auto; margin-top: 50px;">
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name:</label>
+                {{ form.name }}
+            </div>
+
+            <div class="text-center" style="margin-top: 20px;">
+                <a type="button" class="btn btn-danger" href="{% url 'feature_list' %}">Cancel</a>
+                <button type="submit" class="btn btn-success">Create Feature</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

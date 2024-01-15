@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tenant_app',
-    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
